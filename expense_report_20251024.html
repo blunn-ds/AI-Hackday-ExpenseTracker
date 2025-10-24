@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Report - 2025-10-24</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .summary-card {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .summary-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .summary-card .value {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .expenses-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .expenses-table th {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .expenses-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .expenses-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .expenses-table tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .amount {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .category {
+            background: #3498db;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            display: inline-block;
+        }
+        
+        .category-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .category-card {
+            background: #f8f9fa;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .category-card h4 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .category-amount {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .progress-bar {
+            background: #ecf0f1;
+            height: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .container { padding: 20px; }
+            .expenses-table { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰 Expense Report</h1>
+        <p style="text-align: center; color: #7f8c8d; font-size: 1.1em;">
+            Generated on October 24, 2025
+        </p>
+        
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h3>Total Expenses</h3>
+                <p class="value">23</p>
+            </div>
+            <div class="summary-card">
+                <h3>Total Amount</h3>
+                <p class="value">$1049.57</p>
+            </div>
+            <div class="summary-card">
+                <h3>Average Expense</h3>
+                <p class="value">$45.63</p>
+            </div>
+            <div class="summary-card">
+                <h3>Date Range</h3>
+                <p class="value" style="font-size: 1.2em;">2025-10-01<br>to<br>2025-10-24</p>
+            </div>
+        </div>
+        
+        <h2>📊 Category Breakdown</h2>
+        <div class="category-summary">
+
+            <div class="category-card">
+                <h4>
+                    Bills
+                    <span class="category-amount">$351.25</span>
+                </h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 33.46608611145516%"></div>
+                </div>
+                <p style="margin: 5px 0 0 0; color: #7f8c8d;">33.5% of total spending</p>
+            </div>
+
+            <div class="category-card">
+                <h4>
+                    Shopping
+                    <span class="category-amount">$227.13</span>
+                </h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 21.640290785750352%"></div>
+                </div>
+                <p style="margin: 5px 0 0 0; color: #7f8c8d;">21.6% of total spending</p>
+            </div>
+
+            <div class="category-card">
+                <h4>
+                    Healthcare
+                    <span class="category-amount">$219.95</span>
+                </h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 20.95620111093114%"></div>
+                </div>
+                <p style="margin: 5px 0 0 0; color: #7f8c8d;">21.0% of total spending</p>
+            </div>
+
+            <div class="category-card">
+                <h4>
+                    Transport
+                    <span class="category-amount">$117.90</span>
+                </h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 11.233171679830784%"></div>
+                </div>
+                <p style="margin: 5px 0 0 0; color: #7f8c8d;">11.2% of total spending</p>
+            </div>
+
+            <div class="category-card">
+                <h4>
+                    Entertainment
+                    <span class="category-amount">$92.24</span>
+                </h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 8.788360947816724%"></div>
+                </div>
+                <p style="margin: 5px 0 0 0; color: #7f8c8d;">8.8% of total spending</p>
+            </div>
+
+            <div class="category-card">
+                <h4>
+                    Food
+                    <span class="category-amount">$41.10</span>
+                </h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 3.9158893642158215%"></div>
+                </div>
+                <p style="margin: 5px 0 0 0; color: #7f8c8d;">3.9% of total spending</p>
+            </div>
+
+        </div>
+        
+        <h2>📋 All Expenses</h2>
+        <table class="expenses-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>2025-10-24</td>
+                    <td><span class="category">Transport</span></td>
+                    <td>Bus fare for city center trip</td>
+                    <td class="amount">$15.00</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-23</td>
+                    <td><span class="category">Shopping</span></td>
+                    <td>Household cleaning supplies</td>
+                    <td class="amount">$23.75</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-22</td>
+                    <td><span class="category">Food</span></td>
+                    <td>Morning coffee at local café</td>
+                    <td class="amount">$4.50</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-22</td>
+                    <td><span class="category">Entertainment</span></td>
+                    <td>Bowling night with colleagues</td>
+                    <td class="amount">$28.75</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-21</td>
+                    <td><span class="category">Shopping</span></td>
+                    <td>Weekly groceries at supermarket</td>
+                    <td class="amount">$67.89</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-20</td>
+                    <td><span class="category">Food</span></td>
+                    <td>Lunch at downtown restaurant</td>
+                    <td class="amount">$12.75</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-20</td>
+                    <td><span class="category">Transport</span></td>
+                    <td>Uber rides (3 trips)</td>
+                    <td class="amount">$42.30</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-19</td>
+                    <td><span class="category">Food</span></td>
+                    <td>Brunch with friends</td>
+                    <td class="amount">$15.60</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-19</td>
+                    <td><span class="category">Entertainment</span></td>
+                    <td>Movie tickets for evening show</td>
+                    <td class="amount">$18.50</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-18</td>
+                    <td><span class="category">Food</span></td>
+                    <td>Pizza delivery for dinner</td>
+                    <td class="amount">$8.25</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-17</td>
+                    <td><span class="category">Shopping</span></td>
+                    <td>New book and stationery supplies</td>
+                    <td class="amount">$45.99</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-16</td>
+                    <td><span class="category">Shopping</span></td>
+                    <td>Winter jacket from clothing store</td>
+                    <td class="amount">$89.50</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-15</td>
+                    <td><span class="category">Transport</span></td>
+                    <td>Taxi ride to airport</td>
+                    <td class="amount">$35.60</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-14</td>
+                    <td><span class="category">Transport</span></td>
+                    <td>Weekly metro pass</td>
+                    <td class="amount">$25.00</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-13</td>
+                    <td><span class="category">Entertainment</span></td>
+                    <td>Concert tickets</td>
+                    <td class="amount">$32.00</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-13</td>
+                    <td><span class="category">Healthcare</span></td>
+                    <td>Prescription medication</td>
+                    <td class="amount">$24.95</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-12</td>
+                    <td><span class="category">Healthcare</span></td>
+                    <td>Doctor consultation</td>
+                    <td class="amount">$75.00</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-10</td>
+                    <td><span class="category">Bills</span></td>
+                    <td>Water and gas utilities</td>
+                    <td class="amount">$95.75</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-08</td>
+                    <td><span class="category">Healthcare</span></td>
+                    <td>Dental cleaning appointment</td>
+                    <td class="amount">$120.00</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-07</td>
+                    <td><span class="category">Bills</span></td>
+                    <td>Mobile phone bill</td>
+                    <td class="amount">$45.00</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-05</td>
+                    <td><span class="category">Bills</span></td>
+                    <td>Monthly electricity bill</td>
+                    <td class="amount">$125.00</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-03</td>
+                    <td><span class="category">Bills</span></td>
+                    <td>Internet and cable package</td>
+                    <td class="amount">$85.50</td>
+                </tr>
+
+                <tr>
+                    <td>2025-10-01</td>
+                    <td><span class="category">Entertainment</span></td>
+                    <td>Streaming service subscription</td>
+                    <td class="amount">$12.99</td>
+                </tr>
+
+            </tbody>
+        </table>
+        
+        <div class="footer">
+            <p>This report contains 23 expenses totaling $1049.57</p>
+            <p>Generated by Personal Expense Tracker | AI Hackday 2025</p>
+        </div>
+    </div>
+</body>
+</html>

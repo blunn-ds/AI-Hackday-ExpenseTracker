@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% block title %}Export Data - Expense Tracker{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-5 fw-bold">
+            <i class="bi bi-download"></i> Export Your Data
+        </h1>
+        <p class="text-muted">Download your expense data in various formats for sharing or backup</p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- CSV Export -->
+    <div class="col-md-6">
+        <div class="card card-custom">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-filetype-csv"></i> CSV Export
+                </h5>
+            </div>
+            <div class="card-body">
+                <p>Export your expenses to CSV format for use with Excel, Google Sheets, or other spreadsheet applications.</p>
+                
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i>
+                    <strong>CSV Format includes:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Date, Amount, Category, Description</li>
+                        <li>Compatible with Excel and Google Sheets</li>
+                        <li>Perfect for further analysis</li>
+                    </ul>
+                </div>
+
+                <a href="{{ url_for('export_csv') }}" class="btn btn-success btn-lg w-100">
+                    <i class="bi bi-download"></i> Download CSV File
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HTML Report -->
+    <div class="col-md-6">
+        <div class="card card-custom">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-filetype-html"></i> HTML Report
+                </h5>
+            </div>
+            <div class="card-body">
+                <p>Generate a beautiful HTML report that can be opened in any web browser or shared with colleagues.</p>
+                
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i>
+                    <strong>HTML Report includes:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Professional styling with charts</li>
+                        <li>Category breakdown with progress bars</li>
+                        <li>Complete expense table</li>
+                        <li>Mobile-responsive design</li>
+                    </ul>
+                </div>
+
+                <button onclick="generateHTMLReport()" class="btn btn-primary btn-lg w-100">
+                    <i class="bi bi-file-earmark-code"></i> Generate HTML Report
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <!-- API Access -->
+    <div class="col-md-6">
+        <div class="card card-custom">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-code-slash"></i> API Access
+                </h5>
+            </div>
+            <div class="card-body">
+                <p>Access your expense data programmatically via our JSON API endpoints.</p>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-bold">All Expenses:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" value="{{ request.host_url }}api/expenses" readonly>
+                        <button class="btn btn-outline-secondary" onclick="copyToClipboard(this.previousElementSibling)">
+                            <i class="bi bi-clipboard"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Statistics:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" value="{{ request.host_url }}api/stats" readonly>
+                        <button class="btn btn-outline-secondary" onclick="copyToClipboard(this.previousElementSibling)">
+                            <i class="bi bi-clipboard"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <small>Use these URLs to integrate with other applications or scripts.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Backup & Sync -->
+    <div class="col-md-6">
+        <div class="card card-custom">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                    <i class="bi bi-cloud-upload"></i> Backup & Sync
+                </h5>
+            </div>
+            <div class="card-body">
+                <p>Keep your data safe with regular backups and sync options.</p>
+                
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-primary" onclick="downloadJSON()">
+                        <i class="bi bi-filetype-json"></i> Download JSON Backup
+                    </button>
+                    
+                    <button class="btn btn-outline-success" onclick="printReport()">
+                        <i class="bi bi-printer"></i> Print Friendly Report
+                    </button>
+                </div>
+
+                <div class="alert alert-success mt-3">
+                    <i class="bi bi-shield-check"></i>
+                    <small><strong>Pro Tip:</strong> Regular backups ensure you never lose your expense data!</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Export Instructions -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card card-custom">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-question-circle"></i> How to Share Your Data
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6><i class="bi bi-envelope"></i> Via Email</h6>
+                        <p class="small">Export as CSV or HTML and attach to email. Recipients can open files directly.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h6><i class="bi bi-cloud"></i> Cloud Storage</h6>
+                        <p class="small">Upload exported files to Google Drive, Dropbox, or OneDrive for easy sharing.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h6><i class="bi bi-link-45deg"></i> Direct Access</h6>
+                        <p class="small">Share the web app URL with colleagues for real-time access to data.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function copyToClipboard(input) {
+        input.select();
+        input.setSelectionRange(0, 99999); // For mobile devices
+        document.execCommand('copy');
+        
+        // Show feedback
+        const button = input.nextElementSibling;
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="bi bi-check"></i>';
+        button.classList.remove('btn-outline-secondary');
+        button.classList.add('btn-success');
+        
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.classList.remove('btn-success');
+            button.classList.add('btn-outline-secondary');
+        }, 1500);
+    }
+
+    function generateHTMLReport() {
+        // This would typically call the HTML report generator
+        fetch('/api/expenses')
+            .then(response => response.json())
+            .then(data => {
+                // For now, show a success message
+                alert('HTML Report generation would be implemented here!\n\n' + 
+                      `Found ${data.length} expenses to include in the report.`);
+            })
+            .catch(error => {
+                alert('Error generating report: ' + error.message);
+            });
+    }
+
+    function downloadJSON() {
+        fetch('/api/expenses')
+            .then(response => response.json())
+            .then(data => {
+                const dataStr = JSON.stringify(data, null, 2);
+                const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+                
+                const exportFileDefaultName = `expenses_backup_${new Date().toISOString().split('T')[0]}.json`;
+                
+                const linkElement = document.createElement('a');
+                linkElement.setAttribute('href', dataUri);
+                linkElement.setAttribute('download', exportFileDefaultName);
+                linkElement.click();
+            })
+            .catch(error => {
+                alert('Error downloading JSON: ' + error.message);
+            });
+    }
+
+    function printReport() {
+        window.print();
+    }
+</script>
+{% endblock %}

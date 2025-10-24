@@ -1,0 +1,163 @@
+[
+  {
+    "id": "2025-10-20_28_1275",
+    "date": "2025-10-20",
+    "amount": 12.75,
+    "category": "Food",
+    "description": "Lunch at downtown restaurant"
+  },
+  {
+    "id": "2025-10-18_25_825",
+    "date": "2025-10-18",
+    "amount": 8.25,
+    "category": "Food",
+    "description": "Pizza delivery for dinner"
+  },
+  {
+    "id": "2025-10-19_19_1560",
+    "date": "2025-10-19",
+    "amount": 15.6,
+    "category": "Food",
+    "description": "Brunch with friends"
+  },
+  {
+    "id": "2025-10-21_31_6789",
+    "date": "2025-10-21",
+    "amount": 67.89,
+    "category": "Shopping",
+    "description": "Weekly groceries at supermarket"
+  },
+  {
+    "id": "2025-10-17_32_4599",
+    "date": "2025-10-17",
+    "amount": 45.99,
+    "category": "Shopping",
+    "description": "New book and stationery supplies"
+  },
+  {
+    "id": "2025-10-16_33_8950",
+    "date": "2025-10-16",
+    "amount": 89.5,
+    "category": "Shopping",
+    "description": "Winter jacket from clothing store"
+  },
+  {
+    "id": "2025-10-23_27_2375",
+    "date": "2025-10-23",
+    "amount": 23.75,
+    "category": "Shopping",
+    "description": "Household cleaning supplies"
+  },
+  {
+    "id": "2025-10-24_29_1500",
+    "date": "2025-10-24",
+    "amount": 15.0,
+    "category": "Transport",
+    "description": "Bus fare for city center trip"
+  },
+  {
+    "id": "2025-10-15_20_3560",
+    "date": "2025-10-15",
+    "amount": 35.6,
+    "category": "Transport",
+    "description": "Taxi ride to airport"
+  },
+  {
+    "id": "2025-10-14_17_2500",
+    "date": "2025-10-14",
+    "amount": 25.0,
+    "category": "Transport",
+    "description": "Weekly metro pass"
+  },
+  {
+    "id": "2025-10-20_20_4230",
+    "date": "2025-10-20",
+    "amount": 42.3,
+    "category": "Transport",
+    "description": "Uber rides (3 trips)"
+  },
+  {
+    "id": "2025-10-19_30_1850",
+    "date": "2025-10-19",
+    "amount": 18.5,
+    "category": "Entertainment",
+    "description": "Movie tickets for evening show"
+  },
+  {
+    "id": "2025-10-13_15_3200",
+    "date": "2025-10-13",
+    "amount": 32.0,
+    "category": "Entertainment",
+    "description": "Concert tickets"
+  },
+  {
+    "id": "2025-10-01_30_1299",
+    "date": "2025-10-01",
+    "amount": 12.99,
+    "category": "Entertainment",
+    "description": "Streaming service subscription"
+  },
+  {
+    "id": "2025-10-22_29_2875",
+    "date": "2025-10-22",
+    "amount": 28.75,
+    "category": "Entertainment",
+    "description": "Bowling night with colleagues"
+  },
+  {
+    "id": "2025-10-05_24_12500",
+    "date": "2025-10-05",
+    "amount": 125.0,
+    "category": "Bills",
+    "description": "Monthly electricity bill"
+  },
+  {
+    "id": "2025-10-03_26_8550",
+    "date": "2025-10-03",
+    "amount": 85.5,
+    "category": "Bills",
+    "description": "Internet and cable package"
+  },
+  {
+    "id": "2025-10-07_17_4500",
+    "date": "2025-10-07",
+    "amount": 45.0,
+    "category": "Bills",
+    "description": "Mobile phone bill"
+  },
+  {
+    "id": "2025-10-10_23_9575",
+    "date": "2025-10-10",
+    "amount": 95.75,
+    "category": "Bills",
+    "description": "Water and gas utilities"
+  },
+  {
+    "id": "2025-10-12_19_7500",
+    "date": "2025-10-12",
+    "amount": 75.0,
+    "category": "Healthcare",
+    "description": "Doctor consultation"
+  },
+  {
+    "id": "2025-10-13_23_2495",
+    "date": "2025-10-13",
+    "amount": 24.95,
+    "category": "Healthcare",
+    "description": "Prescription medication"
+  },
+  {
+    "id": "2025-10-08_27_12000",
+    "date": "2025-10-08",
+    "amount": 120.0,
+    "category": "Healthcare",
+    "description": "Dental cleaning appointment"
+  },
+  {
+    "id": "1976-10-24_10_10000",
+    "date": "1976-10-24",
+    "amount": 100.0,
+    "category": "Education",
+    "description": "AI trining"
+  }
+]

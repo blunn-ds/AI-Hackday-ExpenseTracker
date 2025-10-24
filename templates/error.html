@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Error {{ error_code }} - Expense Tracker{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <div class="card card-custom">
+            <div class="card-body p-5">
+                <div class="mb-4">
+                    {% if error_code == 404 %}
+                        <i class="bi bi-exclamation-triangle display-1 text-warning"></i>
+                    {% else %}
+                        <i class="bi bi-x-circle display-1 text-danger"></i>
+                    {% endif %}
+                </div>
+                
+                <h1 class="display-4 fw-bold text-muted">{{ error_code }}</h1>
+                
+                <h3 class="mb-4">{{ error_message }}</h3>
+                
+                {% if error_code == 404 %}
+                    <p class="text-muted mb-4">
+                        The page you're looking for doesn't exist or may have been moved.
+                    </p>
+                {% else %}
+                    <p class="text-muted mb-4">
+                        Something went wrong on our end. Please try again or contact support.
+                    </p>
+                {% endif %}
+                
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg">
+                        <i class="bi bi-house"></i> Back to Dashboard
+                    </a>
+                    {% if error_code == 404 %}
+                        <button onclick="history.back()" class="btn btn-outline-secondary btn-lg">
+                            <i class="bi bi-arrow-left"></i> Go Back
+                        </button>
+                    {% else %}
+                        <button onclick="window.location.reload()" class="btn btn-outline-success btn-lg">
+                            <i class="bi bi-arrow-clockwise"></i> Try Again
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        {% if error_code == 500 %}
+        <div class="card card-custom mt-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-info-circle"></i> What can you do?
+                </h5>
+            </div>
+            <div class="card-body">
+                <ul class="text-start">
+                    <li>Check your internet connection</li>
+                    <li>Try refreshing the page</li>
+                    <li>Clear your browser cache</li>
+                    <li>Try again in a few minutes</li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
