@@ -159,5 +159,26 @@
     "amount": 100.0,
     "category": "Education",
     "description": "AI trining"
+  },
+  {
+    "id": "2025-10-24_25_1000",
+    "date": "2025-10-24",
+    "amount": 10.0,
+    "category": "Food",
+    "description": "Pizza for AI Hackney :-) "
+  },
+  {
+    "id": "2025-10-24_24_100000",
+    "date": "2025-10-24",
+    "amount": 1000.0,
+    "category": "Travel",
+    "description": "Traveling far and beyond"
+  },
+  {
+    "id": "2025-10-24_6_3400",
+    "date": "2025-10-24",
+    "amount": 34.0,
+    "category": "Other",
+    "description": "Things"
   }
 ]
