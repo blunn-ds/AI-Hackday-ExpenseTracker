@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block title %}Add Expense - Expense Tracker{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card card-custom">
+            <div class="card-header bg-success text-white text-center">
+                <h3 class="mb-0">
+                    <i class="bi bi-plus-circle-fill"></i> Add New Expense
+                </h3>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('add_expense') }}">
+                    <!-- Amount -->
+                    <div class="mb-4">
+                        <label for="amount" class="form-label fw-bold">
+                            <i class="bi bi-currency-dollar"></i> Amount
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control form-control-lg" 
+                                   id="amount" name="amount" step="0.01" min="0.01" 
+                                   placeholder="0.00" required>
+                        </div>
+                        <div class="form-text">Enter the expense amount (e.g., 15.99)</div>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="mb-4">
+                        <label for="category" class="form-label fw-bold">
+                            <i class="bi bi-tags"></i> Category
+                        </label>
+                        <select class="form-select form-select-lg" id="category" name="category" required>
+                            <option value="">Choose a category...</option>
+                            {% for cat in categories %}
+                            <option value="{{ cat }}">{{ cat }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="form-text">Select the expense category</div>
+                    </div>
+
+                    <!-- Custom Category -->
+                    <div class="mb-4" id="customCategoryDiv" style="display: none;">
+                        <label for="customCategory" class="form-label fw-bold">
+                            <i class="bi bi-tag-fill"></i> Custom Category
+                        </label>
+                        <input type="text" class="form-control" id="customCategory" 
+                               placeholder="Enter new category name">
+                        <div class="form-text">Create a new category for this expense</div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-4">
+                        <label for="description" class="form-label fw-bold">
+                            <i class="bi bi-card-text"></i> Description
+                        </label>
+                        <input type="text" class="form-control form-control-lg" 
+                               id="description" name="description" 
+                               placeholder="What did you spend money on?" required>
+                        <div class="form-text">Brief description of the expense</div>
+                    </div>
+
+                    <!-- Date -->
+                    <div class="mb-4">
+                        <label for="date" class="form-label fw-bold">
+                            <i class="bi bi-calendar3"></i> Date
+                        </label>
+                        <input type="date" class="form-control form-control-lg" 
+                               id="date" name="date">
+                        <div class="form-text">Leave empty for today's date</div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary btn-custom me-md-2">
+                            <i class="bi bi-arrow-left"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-success btn-custom">
+                            <i class="bi bi-check-circle"></i> Add Expense
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Quick Add Buttons -->
+        <div class="card card-custom mt-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-lightning-charge"></i> Quick Add Common Expenses
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <button class="btn btn-outline-primary w-100 quick-add" 
+                                data-amount="4.50" data-category="Food" data-desc="Coffee">
+                            <i class="bi bi-cup-hot"></i> Coffee ($4.50)
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-outline-primary w-100 quick-add" 
+                                data-amount="12.00" data-category="Food" data-desc="Lunch">
+                            <i class="bi bi-bag"></i> Lunch ($12.00)
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-outline-primary w-100 quick-add" 
+                                data-amount="25.00" data-category="Transport" data-desc="Taxi/Uber">
+                            <i class="bi bi-car-front"></i> Taxi ($25.00)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set today's date as default
+        const dateInput = document.getElementById('date');
+        const today = new Date().toISOString().split('T')[0];
+        if (!dateInput.value) {
+            dateInput.value = today;
+        }
+
+        // Handle category selection
+        const categorySelect = document.getElementById('category');
+        const customCategoryDiv = document.getElementById('customCategoryDiv');
+        const customCategoryInput = document.getElementById('customCategory');
+
+        // Add "Other (Custom)" option to category select
+        const customOption = document.createElement('option');
+        customOption.value = 'custom';
+        customOption.textContent = '➕ Other (Custom Category)';
+        categorySelect.appendChild(customOption);
+
+        categorySelect.addEventListener('change', function() {
+            if (this.value === 'custom') {
+                customCategoryDiv.style.display = 'block';
+                customCategoryInput.required = true;
+            } else {
+                customCategoryDiv.style.display = 'none';
+                customCategoryInput.required = false;
+            }
+        });
+
+        // Handle custom category input
+        customCategoryInput.addEventListener('input', function() {
+            if (this.value.trim()) {
+                categorySelect.name = '';  // Don't submit the select
+                this.name = 'category';    // Use the custom input instead
+            } else {
+                categorySelect.name = 'category';
+                this.name = '';
+            }
+        });
+
+        // Quick add functionality
+        const quickAddButtons = document.querySelectorAll('.quick-add');
+        quickAddButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                document.getElementById('amount').value = this.dataset.amount;
+                document.getElementById('category').value = this.dataset.category;
+                document.getElementById('description').value = this.dataset.desc;
+                
+                // Scroll to form
+                document.querySelector('.card').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Form validation feedback
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            const amount = parseFloat(document.getElementById('amount').value);
+            if (amount <= 0) {
+                e.preventDefault();
+                alert('Please enter a valid amount greater than 0');
+                return;
+            }
+            
+            const category = document.getElementById('category').value;
+            const customCategory = document.getElementById('customCategory').value;
+            if (!category && !customCategory.trim()) {
+                e.preventDefault();
+                alert('Please select or enter a category');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Adding...';
+            submitBtn.disabled = true;
+        });
+    });
+</script>
+{% endblock %}
